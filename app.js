@@ -14,12 +14,12 @@ bot.on('ready', async () => {
 
 bot.on('message', message => {
     if (message.channel.type === 'dm') return;
-    if (message.content == "@colors") {
-        message.reply("Available colors: red, blue, green, yellow, purple, gold, brown, orange, indigo, black, white and rose. Change colors with @<color>.");
+    if (message.content == "!colors") {
+        message.reply("Available colors: red, blue, green, yellow, purple, gold, brown, orange, black, white and rose. Change colors with !<color>.");
         return;
     }
-    if (message.content.charAt(0) == '@'){
-        let cmd = message.content.split('@');
+    if (message.content.charAt(0) == '!'){
+        let cmd = message.content.split('!');
         var blue = message.guild.roles.find("name", "Blue");
         var red = message.guild.roles.find("name", "Red");
         var green = message.guild.roles.find("name", "Green");
@@ -28,7 +28,7 @@ bot.on('message', message => {
         var gold = message.guild.roles.find("name", "Gold");
         var brown = message.guild.roles.find("name", "Brown");
         var orange = message.guild.roles.find("name", "Orange");
-        var indigo = message.guild.roles.find("name", "Indigo");
+
         var black = message.guild.roles.find("name", "Black");
         var white = message.guild.roles.find("name", "White");
         var rose = message.guild.roles.find("name", "Rose");
@@ -54,8 +54,8 @@ bot.on('message', message => {
                 message.guild.member(message.author).removeRole(brown);
             } else if (message.member.roles.has(orange.id)) {
                 message.guild.member(message.author).removeRole(orange);
-            } else if (message.member.roles.has(indigo.id)) {
-                message.guild.member(message.author).removeRole(indigo);
+      
+                
             } else if (message.member.roles.has(black.id)) {
                 message.guild.member(message.author).removeRole(black);
             } else if (message.member.roles.has(white.id)) {
@@ -66,7 +66,7 @@ bot.on('message', message => {
         } else {
             return;
         }
-        switch(cmd[1]) {
+        switch(cmd[1].toLowerCase()) {
             case 'blue':
                 message.guild.member(message.author).addRole(blue);
                 message.delete();
@@ -107,11 +107,8 @@ bot.on('message', message => {
                 message.delete();
                 message.guild.member(message.author).addRole(message.guild.roles.find("name", "1"));
                 return;
-            case 'indigo':
-                message.guild.member(message.author).addRole(indigo);
-                message.delete();
-                message.guild.member(message.author).addRole(message.guild.roles.find("name", "1"));
-                return;
+
+
             case 'black':
                 message.guild.member(message.author).addRole(black);
                 message.delete();
