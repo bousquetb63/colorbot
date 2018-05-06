@@ -15,9 +15,14 @@ bot.on('ready', async () => {
 bot.on('message', message => {
     if (message.channel.type === 'dm') return;
     if (message.content == "!colors") {
-        message.reply("Available colors: red, blue, green, yellow, purple, gold, brown, orange, black, white and rose. Change colors with !<color>.");
+        message.delete();
+        message.reply("Available colors: red, blue, green, yellow, purple, gold, brown, orange, black, white and rose. Change colors with !<color>.")
+        .then(msg => {
+            msg.delete(5000);
+        });
         return;
     }
+    console.log(message.channel);
     if (message.content.charAt(0) == '!'){
         let cmd = message.content.split('!');
         var blue = message.guild.roles.find("name", "Blue");
@@ -28,13 +33,15 @@ bot.on('message', message => {
         var gold = message.guild.roles.find("name", "Gold");
         var brown = message.guild.roles.find("name", "Brown");
         var orange = message.guild.roles.find("name", "Orange");
-
         var black = message.guild.roles.find("name", "Black");
         var white = message.guild.roles.find("name", "White");
         var rose = message.guild.roles.find("name", "Rose");
         if(cmd[1] == "blue" || cmd[1] == "red" || cmd[1] == "green" || cmd[1] == "yellow" || cmd[1] == "purple" || cmd[1] == "gold" || cmd[1] == "brown" || cmd[1] == "orange" || cmd[1] == "indigo" || cmd[1] == "black" || cmd[1] == "white" || cmd[1] == "rose") {
             if(message.member.roles.has(message.guild.roles.find("name", "1").id)){
-                message.reply("Contact an admin if you want to change colors!");
+                message.reply("Contact an admin if you want to change colors!")
+                .then(msg => {
+                    msg.delete(5000);
+                });
                 message.delete();
                 return;
             }
@@ -54,8 +61,6 @@ bot.on('message', message => {
                 message.guild.member(message.author).removeRole(brown);
             } else if (message.member.roles.has(orange.id)) {
                 message.guild.member(message.author).removeRole(orange);
-      
-                
             } else if (message.member.roles.has(black.id)) {
                 message.guild.member(message.author).removeRole(black);
             } else if (message.member.roles.has(white.id)) {
@@ -107,8 +112,6 @@ bot.on('message', message => {
                 message.delete();
                 message.guild.member(message.author).addRole(message.guild.roles.find("name", "1"));
                 return;
-
-
             case 'black':
                 message.guild.member(message.author).addRole(black);
                 message.delete();
